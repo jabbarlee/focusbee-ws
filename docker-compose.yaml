@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   focusbee-ws:
@@ -20,7 +20,13 @@ services:
     networks:
       - focusbee-network
     healthcheck:
-      test: ["CMD", "node", "-e", "const http = require('http'); const options = { host: 'localhost', port: 3001, timeout: 2000 }; const request = http.request(options, (res) => { process.exit(res.statusCode === 200 ? 0 : 1); }); request.on('error', () => { process.exit(1); }); request.end();"]
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "const http = require('http'); const options = { host: 'localhost', port: 3001, timeout: 2000 }; const request = http.request(options, (res) => { process.exit(res.statusCode === 200 ? 0 : 1); }); request.on('error', () => { process.exit(1); }); request.end();",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3
